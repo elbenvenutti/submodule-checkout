@@ -6,10 +6,14 @@ inputs:
     description: 'SSH private key for private submodule access'
     required: false
     default: ''
+  safe-directories:
+    description: 'Comma separated list of directories to be added to git safe.directory'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args: ['${{ inputs.ssh-key }}']
+  args: ['${{ inputs.ssh-key }}', '${{ inputs.safe-directories }}']
 branding:
   icon: 'box'
   color: 'blue'
