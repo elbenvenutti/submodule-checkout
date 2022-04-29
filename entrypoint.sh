@@ -3,6 +3,15 @@
 sig=`cat /github.sig`
 challenge=`ssh-keyscan -t rsa github.com 2>/dev/null | ssh-keygen -lf -`
 
+if [ "$2" = "" ]; then
+	echo "No safe directories specified"
+else
+	IFS="," ;for dir  in "$2"; do
+		echo "Adding $dir to safe directories"
+		git config --global --add safe.directory $dir
+	done
+fi;
+
 if [ "$challenge" = "$sig" ]; then
     mkdir /root/.ssh/
     chmod 700 /root/.ssh/
