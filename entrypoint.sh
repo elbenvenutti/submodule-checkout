@@ -14,6 +14,8 @@ if [ "$challenge" = "$sig" ]; then
         echo "SSH key detected, attempting private checkout"
         echo "$1" > /root/.ssh/ssh.key
         chmod 600 /root/.ssh/ssh.key
+        git config --global --add safe.directory /github/workspace
+        git config --global --add safe.directory /github/workspace/docker/themes/mlops
         export GIT_SSH_COMMAND="ssh -i /root/.ssh/ssh.key"
         git submodule update --init --recursive
     fi;
